@@ -15,15 +15,19 @@ public class StaticTest extends StaticSuper {
 
     public static void main(String[] args) {
         System.out.println("Внутри Main");
-        StaticTest st = new StaticTest();
+/*        StaticTest st = new StaticTest();
 
         TmpRisk takeRisk = new TmpRisk();
         try {
             takeRisk.takeRisk();
         } catch (BadException ex) {
             System.out.println("Сработал BadException");
+            ex.printStackTrace();
         }
-        System.out.println("This is 26 line");
+        System.out.println("This is 26 line");*/
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        Foo foo = new Foo();
+        foo.go();
 
 
     }
