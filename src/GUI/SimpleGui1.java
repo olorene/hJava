@@ -13,6 +13,5 @@ public class SimpleGui1 {
         frame.getContentPane().add(button);
         frame.setSize(300, 300);
         frame.setVisible(true);
-
     }
 }
