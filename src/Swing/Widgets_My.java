@@ -12,10 +12,11 @@ public class Widgets_My implements ActionListener {
     JTextField textField = new JTextField("This is a text field");
     JPanel panelLeft = new JPanel();
     JPanel panelRight = new JPanel();
+    JPanel panelSouth = new JPanel();
 
     public static void main(String[] args) {
         Widgets_My widgets_my = new Widgets_My();
-        widgets_my.go2();
+        widgets_my.go4();
     }
 
     public void go() {
@@ -23,8 +24,10 @@ public class Widgets_My implements ActionListener {
 
         frame.getContentPane().add(BorderLayout.EAST, panelRight);
         frame.getContentPane().add(BorderLayout.WEST, panelLeft);
+        frame.getContentPane().add(BorderLayout.SOUTH, panelSouth);
         panelLeft.add(BorderLayout.CENTER, checkBox );
         panelRight.add(BorderLayout.CENTER, button );
+        panelSouth.add(BorderLayout.CENTER, textField);
 
         goEnd();
     }
@@ -42,6 +45,28 @@ public class Widgets_My implements ActionListener {
 
         goEnd();
 
+    }
+
+    public void go3(){
+        Font bigFont = new Font("serif", Font.BOLD, 28);
+        button.setFont(bigFont);
+
+        goStart();
+        frame.getContentPane().add(BorderLayout.NORTH, button);
+        goEnd();
+    }
+
+    public void go4() {
+        JFrame frameGo4 = new JFrame();
+        JPanel panelGo4 = new JPanel();
+        panelGo4.setBackground(Color.DARK_GRAY);
+
+        JButton buttonGo4 = new JButton("This is RED");
+        panelGo4.add(buttonGo4);
+
+        goStart();
+        frameGo4.getContentPane().add(BorderLayout.EAST, panelGo4);
+        goEnd();
     }
 
     private void goEnd() {
