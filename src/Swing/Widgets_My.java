@@ -1,11 +1,15 @@
 package Swing;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
-public class Widgets_My implements ActionListener {
+public class Widgets_My implements ActionListener, ItemListener, ListSelectionListener {
     JFrame frame = new JFrame();
     JButton button = new JButton("Click my");
     JCheckBox checkBox = new JCheckBox("Choose me");
@@ -17,10 +21,13 @@ public class Widgets_My implements ActionListener {
     JPanel panelSouth = new JPanel();
     JPanel panel = new JPanel();
     JButton buttonGo4;
+    JList list;
+//    JCheckBox checkBox = new JCheckBox("Goes to 11");
+
 
     public static void main(String[] args) {
         Widgets_My widgets_my = new Widgets_My();
-        widgets_my.go7();
+        widgets_my.go9();
     }
 
     public void go() {
@@ -113,6 +120,33 @@ public class Widgets_My implements ActionListener {
         goEnd();
     }
 
+    public void go8() { //Check Box
+        goStart();
+        checkBox.addItemListener(this);
+        checkBox.setSelected(true);
+        panel.add(checkBox);
+        frame.getContentPane().add(BorderLayout.CENTER, panel);
+        goEnd();
+    }
+
+    public void go9() { //JList
+        goStart();
+        String[] listEntries = {"Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta"};
+        list = new JList(listEntries);
+
+        list.setVisibleRowCount(4);
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list.addListSelectionListener(this);
+
+        JScrollPane scrollPane = new JScrollPane(list);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        panel.add(scrollPane);
+
+        frame.getContentPane().add(BorderLayout.CENTER, panel);
+        goEnd();
+    }
+
     private void goStart() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         button.addActionListener(this);
@@ -129,5 +163,20 @@ public class Widgets_My implements ActionListener {
 //        textField.setText("  Aloha!!!  ");
         textArea.append("button clicked \n");
 
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        String onOrOff = "off";
+        if (checkBox.isSelected()) onOrOff = "on";
+        System.out.println("Check box is " + onOrOff);
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        if(!e.getValueIsAdjusting()) {
+            String selection = (String) list.getSelectedValue();
+            System.out.println(selection);
+        }
     }
 }
