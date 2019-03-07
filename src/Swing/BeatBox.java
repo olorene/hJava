@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class BeatBox {
-    JPanel mainJpanel;
+    JPanel mainPanel;
     ArrayList<JCheckBox> checkboxList;
     Sequencer sequencer;
     Sequence sequence;
@@ -69,6 +69,22 @@ public class BeatBox {
         GridLayout grid = new GridLayout(16, 16);
         grid.setVgap(1);
         grid.setHgap(2);
+        mainPanel = new JPanel(grid);
+        background.add(BorderLayout.CENTER, mainPanel);
+
+        for (int i = 0; i < 256; i++) {
+            JCheckBox c = new JCheckBox();
+            c.setSelected(false);
+            checkboxList.add(c);
+            mainPanel.add(c);
+        }
+
+        setUpMidi();
+
+        theFrame.setBounds(50, 50, 300, 300);
+        theFrame.pack();
+        theFrame.setVisible(true);
+
     }
 
     public void setUpMidi() {
