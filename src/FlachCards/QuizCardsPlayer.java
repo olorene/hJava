@@ -1,8 +1,10 @@
 package FlachCards;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 public class QuizCardsPlayer {
@@ -21,6 +23,10 @@ public class QuizCardsPlayer {
     }
 
     public void go(){
+//        Формируем GUI
+        frame = new JFrame("Quiz Card Player");
+        JPanel mainPanel = new JPanel();
+        Font bigFont = new Font("sanserif", Font.BOLD, 24);
 
     }
 
@@ -36,6 +42,18 @@ public class QuizCardsPlayer {
         public void actionPerformed(ActionEvent e) {
 
         }
+    }
+
+    private void loadFile(File file) {
+
+    }
+
+    private void makeCard(String lineToParse) {
+
+    }
+
+    private void showNextCard() {
+
     }
 
 
