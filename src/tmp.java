@@ -1,11 +1,27 @@
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
+
 public class tmp {
-    public void tmp() {
-        int a = 1;
-        int b = 2;
+    public void tmpMethod() {
+        String[] strings = new String[]{"Заклинания", "Невидемость"};
+        String[] result = new String[strings.length + 1];
 
-        testDriveMain testDriveMain = new testDriveMain();
+        print_String_Array(strings);
 
-        int result = testDriveMain.sum(a, b);
-        System.out.println(result);
+        for (int i = 0; i < strings.length; i++) {
+            result[i] = strings[i];
+        }
+        result[strings.length] = "Щит";
+        System.out.println(strings.length);
+        System.out.println(result.length);
+
+        print_String_Array(result);
+
+    }
+
+    private void print_String_Array(String[] strings) {
+        for (int i = 0; i < strings.length; i++) {
+            System.out.println(strings[i]);
+        }
+        System.out.println("----------");
     }
 }
