@@ -22,6 +22,7 @@ public class QuizCardBuilder {
     public void go(){
 //    Формирует вывод на экран GUI
         frame = new JFrame("Quiz card builder");
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         JPanel mainPanel = new JPanel();
         Font bigFont = new Font("sanserif", Font.BOLD, 24);
 
@@ -39,7 +40,7 @@ public class QuizCardBuilder {
         answer.setWrapStyleWord(true);
         answer.setFont(bigFont);
 
-        JScrollPane aScroller = new JScrollPane(question);
+        JScrollPane aScroller = new JScrollPane(answer);
         aScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         aScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -131,37 +132,4 @@ public class QuizCardBuilder {
             ex.printStackTrace();
         }
     }
-
-/*    JFrame frame;
-    JPanel panelUp;
-    JPanel panelDown;
-    JTextArea textAreaFront;
-    JTextArea textAreaRevers;
-    public void gui() {
-        frame = new JFrame("QuizCardBuilder");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        panelUp = new JPanel();
-        panelDown = new JPanel();
-
-        textAreaFront = new JTextArea(10, 20);
-        JScrollPane scrollPaneFront = new JScrollPane(textAreaFront);
-        textAreaFront.setLineWrap(true);
-        scrollPaneFront.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPaneFront.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        textAreaRevers = new JTextArea(10, 20);
-        JScrollPane scrollPaneRevers = new JScrollPane(textAreaRevers);
-        textAreaRevers.setLineWrap(true);
-        scrollPaneRevers.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPaneRevers.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        panelUp.add(scrollPaneFront);
-        panelDown.add(scrollPaneRevers);
-
-        frame.getContentPane().add(BorderLayout.NORTH, panelUp);
-        frame.getContentPane().add(BorderLayout.SOUTH, panelDown);
-        frame.setSize(600, 500);
-        frame.setVisible(true);
-    }*/
 }
