@@ -1,4 +1,4 @@
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
+
 
 public class tmp {
     public void tmpMethod() {
@@ -23,5 +23,12 @@ public class tmp {
             System.out.println(strings[i]);
         }
         System.out.println("----------");
+    }
+
+    public static void main(String[] args) {
+        Tmp2 tmp2 = new Tmp2();
+        tmp2.data();
+
+
     }
 }
