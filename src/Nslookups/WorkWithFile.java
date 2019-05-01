@@ -37,7 +37,12 @@ public class WorkWithFile {
     public void writeInFile(String fileForWrite, HashMap<String, String> map) {
         try {
             FileWriter writer = new FileWriter(fileForWrite);
-
+            for (HashMap.Entry entry : map.entrySet()) {
+//                System.out.println(entry.getValue() + " " + entry.getKey());
+                String result = entry.getValue() + "\t" + entry.getKey() + "\r\n";
+                writer.write(result);
+            }
+            writer.close();
 
         } catch (Exception ex) {
             ex.printStackTrace();

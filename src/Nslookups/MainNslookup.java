@@ -19,16 +19,22 @@ public class MainNslookup {
 
             CmdNslookup nslookup = new CmdNslookup();
             String outputCli = nslookup.Nslookup(aDomainName);
+//            System.out.println("========================");
+//            System.out.println(aDomainName);
+//            System.out.println(outputCli);
 
             HashMap<String, String> map = ParsingOutputCli.findIp(aDomainName, outputCli);
             mapAllDomainIp.putAll(map);
         }
-        System.out.println(mapAllDomainIp);
+        readFile.writeInFile(pathToFileResult, mapAllDomainIp);
 
+//        System.out.println(mapAllDomainIp);
 
+    }
 
-
-
+    private String quote(String aText){
+        String QUOTE = "'";
+        return QUOTE + aText + QUOTE;
     }
 
 }
