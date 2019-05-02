@@ -7,7 +7,7 @@ public class MainNslookup {
 //        String aDomainName = "ya.ru";
 //        String aDomainName = "nasa.gov";
 
-        HashMap<String, String> mapAllDomainIp = new HashMap<>();
+        ArrayList<String> mapAllDomainIp = new ArrayList<>();
         String pathToFile = "D:\\tmp\\domainName.txt";
         String pathToFileResult = "D:\\tmp\\resultDomainIp.txt";
         WorkWithFile readFile = new WorkWithFile(pathToFile);
@@ -24,8 +24,8 @@ public class MainNslookup {
 //            System.out.println(aDomainName);
 //            System.out.println(outputCli);
 
-            HashMap<String, String> map = ParsingOutputCli.findIp(aDomainName, outputCli);
-            mapAllDomainIp.putAll(map);
+            ArrayList<String> map = ParsingOutputCli.findIp(aDomainName, outputCli);
+            mapAllDomainIp.addAll(map);
         }
         readFile.writeInFile(pathToFileResult, mapAllDomainIp);
 

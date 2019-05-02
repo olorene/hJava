@@ -1,16 +1,17 @@
 package Nslookups;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public  class  ParsingOutputCli {
-    public static HashMap<String, String> findIp(String aDomainName, String outputCli) {
+    public static ArrayList<String> findIp(String aDomainName, String outputCli) {
         //What we get over from Omnissiah!
 //        System.out.println(outputCli);
 //        System.out.println("===========================");
 
-        HashMap<String, String> map = new HashMap<>();
+        ArrayList<String> map = new ArrayList<>();
 
         String ip = "\\b(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\.)" +
                 "{3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\b";
@@ -48,13 +49,13 @@ public  class  ParsingOutputCli {
                 retval = null;
             }*/
             if (retval != null && addToHashmap == true && !(patternExtraIp.matcher(retval).find())) {
-                map.put(retval, aDomainName);
+                map.add(retval + "=" + aDomainName);
                 findIpForDomainName = true;
             }
 
         }
         if (findIpForDomainName == false) {
-            map.put(aDomainName, aDomainName);
+            map.add(aDomainName + "=" + aDomainName);
         }
 
         return map;
