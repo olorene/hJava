@@ -8,8 +8,8 @@ public class MainNslookup {
 //        String aDomainName = "nasa.gov";
 
         HashMap<String, String> mapAllDomainIp = new HashMap<>();
-        String pathToFile = "C:\\tmp\\domainName.txt";
-        String pathToFileResult = "C:\\tmp\\resultDomainIp.txt";
+        String pathToFile = "D:\\tmp\\domainName.txt";
+        String pathToFileResult = "D:\\tmp\\resultDomainIp.txt";
         WorkWithFile readFile = new WorkWithFile(pathToFile);
         ArrayList<String> arrayDomanName = readFile.openAndReadFile();
         for (int i = 0; i < arrayDomanName.size(); i++) {
@@ -19,6 +19,7 @@ public class MainNslookup {
 
             CmdNslookup nslookup = new CmdNslookup();
             String outputCli = nslookup.Nslookup(aDomainName);
+            System.out.print(".");
 //            System.out.println("========================");
 //            System.out.println(aDomainName);
 //            System.out.println(outputCli);
