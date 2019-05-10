@@ -52,7 +52,7 @@ public class WorkWithFile {
 
     public static void writeFile(String pathToFile, String[] array ) {
         try {
-            FileWriter writer = new FileWriter(pathToFile);
+            FileWriter writer = new FileWriter(pathToFile, true);
             for (String entry : array) {
                 String line = entry + "\r\n";
                 writer.write(line);
