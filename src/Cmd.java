@@ -11,13 +11,12 @@ public class Cmd {
             writeer.flush();
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
             BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-//            System.out.println("Here is the standard output of the command:\\n");
+            System.out.println("Here is the standard output of the command:\\n");
             PrintStream outStream = new PrintStream(System.out, true, "UTF-8");
-            outStream.println("Привет");
             while ((ss = stdInput.readLine()) != null) {
                 outStream.println(ss);
             }
-//            System.out.println("Here is the standard error of the command (if any):\n");
+            System.out.println("Here is the standard error of the command (if any):\n");
             while ((ss = stdError.readLine()) != null) {
                 outStream.println(ss);
             }
