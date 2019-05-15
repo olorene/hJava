@@ -8,6 +8,7 @@ public class CreateHostMonitorFIle {
     public static void main(String[] args) {
         String pathToFileSource = "D:\\tmp\\HostMonitor-List.txt";
         String pathToFileResult = "D:\\tmp\\HostMonitor-Result.txt";
+        WorkWithFile.deleteFile(pathToFileResult);
         CreateHostMonitorFIle createHostMonitorFIle = new CreateHostMonitorFIle();
         String[] outFromFile = WorkWithFile.openFile(pathToFileSource);
 
@@ -32,6 +33,8 @@ public class CreateHostMonitorFIle {
             WorkWithFile.writeFile(pathToFileResult, testHostForFile);
 
         }
+        String[] endFile = createHostMonitorFIle.creatEndFile();
+        WorkWithFile.writeFile(pathToFileResult, endFile);
 
 
 
@@ -41,11 +44,14 @@ public class CreateHostMonitorFIle {
     public String[] creatEndFile() {
 //        ;-----------------------------------------------------------------------------
 //        ; Exported 2 items
-        ArrayList<String> endFileArray = new ArrayList<>();
+        ArrayList<String> endFileArray = new ArrayList<String>();
+        String[] result = null;
 
         endFileArray.add("");
         endFileArray.add("");
-        return endFileArray;
+        result = endFileArray.toArray(new String[endFileArray.size()]);
+
+        return result;
     }
 //    Num host looks lik: 01, 02, 10, 11 etc
     public String[] creareTestForHost(String host, String numHost) {

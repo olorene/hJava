@@ -1,14 +1,11 @@
 package WorkWithFle;
 
-import tmp.Parent;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class WorkWithFile {
 /*    private  String pathToFile;
@@ -60,6 +57,24 @@ public class WorkWithFile {
             writer.close();
 
         } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void deleteFile(String pathToFile) {
+        try {
+            File file = new File(pathToFile);
+            file.delete();
+
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void showDir(String pathToDir) {
+        try (Stream<Path> paths = Files.walk(Paths.get(pathToDir))) {
+            paths.filter(Files::isRegularFile).forEach(System.out::println);
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
