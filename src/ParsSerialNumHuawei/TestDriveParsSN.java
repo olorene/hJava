@@ -17,8 +17,8 @@ public class TestDriveParsSN {
 //            System.out.println(result[i]);
 //        }
         ParsSN parsSN = new ParsSN();
-        ArrayList<String> outDispDevict = parsSN.outDisplayDevice(pathToFile);
-        parsSN.findSlotDispDevice(outDispDevict);
+        ArrayList<String> outDispDevice = parsSN.outDisplayDevice(pathToFile);
+        parsSN.findSlotDispDevice(outDispDevice);
 
 
 
