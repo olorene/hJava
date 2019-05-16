@@ -1,6 +1,14 @@
-
+import java.util.ArrayList;
 
 public class tmp {
+    public static void main(String[] args) {
+        Tmp2 tmp2 = new Tmp2();
+        tmp2.data();
+        tmp2.addStringToStringArray();
+
+    }
+
+
     public void tmpMethod() {
         String[] strings = new String[]{"Заклинания", "Невидемость"};
         String[] result = new String[strings.length + 1];
@@ -16,6 +24,7 @@ public class tmp {
 
         print_String_Array(result);
 
+
     }
 
     private void print_String_Array(String[] strings) {
@@ -25,10 +34,5 @@ public class tmp {
         System.out.println("----------");
     }
 
-    public static void main(String[] args) {
-        Tmp2 tmp2 = new Tmp2();
-        tmp2.data();
 
-
-    }
 }

@@ -1,0 +1,178 @@
+package HostMonitor;
+
+import WorkWithFle.WorkWithFile;
+
+import java.util.ArrayList;
+
+public class CreateHostMonitorFIle {
+    public static void main(String[] args) {
+        String pathToFileSource = "D:\\tmp\\HostMonitor-List.txt";
+        String pathToFileResult = "D:\\tmp\\HostMonitor-Result.txt";
+        WorkWithFile.deleteFile(pathToFileResult);
+        CreateHostMonitorFIle createHostMonitorFIle = new CreateHostMonitorFIle();
+        String[] outFromFile = WorkWithFile.openFile(pathToFileSource);
+
+
+        WorkWithFile.writeFile(pathToFileResult, createHostMonitorFIle.createHeadOfFile(pathToFileResult));
+
+        for (int i = 0; i < outFromFile.length; i++) {
+            String host = outFromFile[i];
+            System.out.println(host);
+
+            String stringNumTestHost = new String();
+            host = host.trim();
+            Integer numTestHost = i + 1;
+            if ( numTestHost >= 1 && numTestHost <= 9) {
+                stringNumTestHost = "0" + numTestHost;
+            } else {
+                stringNumTestHost = numTestHost.toString();
+            }
+            System.out.println(stringNumTestHost);
+
+            String[] testHostForFile = createHostMonitorFIle.creareTestForHost(host, stringNumTestHost);
+            WorkWithFile.writeFile(pathToFileResult, testHostForFile);
+
+        }
+        String[] endFile = createHostMonitorFIle.creatEndFile();
+        WorkWithFile.writeFile(pathToFileResult, endFile);
+
+
+
+
+    }
+
+    public String[] creatEndFile() {
+//        ;-----------------------------------------------------------------------------
+//        ; Exported 2 items
+        ArrayList<String> endFileArray = new ArrayList<String>();
+        String[] result = null;
+
+        endFileArray.add("");
+        endFileArray.add("");
+        result = endFileArray.toArray(new String[endFileArray.size()]);
+
+        return result;
+    }
+//    Num host looks lik: 01, 02, 10, 11 etc
+    public String[] creareTestForHost(String host, String numHost) {
+/*
+; ------- Test #01 -------
+
+
+Method      = Ping
+;--- Common properties ---
+;DestFolder = Root\
+Title       = Ping: www.kaspersky.ru
+Comment     = Ping www.kaspersky.ru
+RelatedURL  =
+NamePattern = %methodname%: %host%
+CmntPattern = Ping %host%
+ScheduleMode= Regular
+Schedule    =
+Interval    = 600
+Alerts      =
+ReverseAlert= No
+UnknownIsBad= Yes
+WarningIsBad= Yes
+UseCommonLog= Yes
+PrivLogMode = Default
+CommLogMode = Default
+MasterAFresh= No
+;--- Test specific properties ---
+Host        = www.kaspersky.ru
+Timeout     = 2000
+Retries     = 4
+MaxLostRatio= 100
+DefJitter   = 100
+DisplayMode = time
+DontFragment= No
+
+
+; ------- Test #02 -------
+*/
+
+        ArrayList<String> stringArrayListr = new ArrayList<>();
+
+        stringArrayListr.add("; ------- Test #" + numHost + " -------");
+        stringArrayListr.add("");
+        stringArrayListr.add("");
+        stringArrayListr.add("Method      = Ping");
+        stringArrayListr.add(";--- Common properties ---");
+        stringArrayListr.add(";DestFolder = Root\\");
+        stringArrayListr.add("Title       = Ping: " + host);
+        stringArrayListr.add("Comment     = Ping " + host);
+        stringArrayListr.add("RelatedURL  = ");
+        stringArrayListr.add("NamePattern = %methodname%: %host%");
+        stringArrayListr.add("CmntPattern = Ping %host%");
+        stringArrayListr.add("ScheduleMode= Regular");
+        stringArrayListr.add("Schedule    = ");
+        stringArrayListr.add("Interval    = 600");
+
+        stringArrayListr.add("Alerts      = ");
+        stringArrayListr.add("ReverseAlert= No");
+        stringArrayListr.add("UnknownIsBad= Yes");
+        stringArrayListr.add("WarningIsBad= Yes");
+        stringArrayListr.add("UseCommonLog= Yes");
+        stringArrayListr.add("PrivLogMode = Default");
+        stringArrayListr.add("CommLogMode = Default");
+        stringArrayListr.add("MasterAFresh= No");
+        stringArrayListr.add(";--- Test specific properties ---");
+        stringArrayListr.add("Host        = " + host);
+        stringArrayListr.add("Timeout     = 2000");
+        stringArrayListr.add("Retries     = 4");
+        stringArrayListr.add("MaxLostRatio= 100");
+        stringArrayListr.add("DefJitter   = 100");
+        stringArrayListr.add("DisplayMode = time");
+        stringArrayListr.add("DontFragment= No");
+        stringArrayListr.add("");
+        stringArrayListr.add("");
+//        ; ------- Test #02 -------
+
+        String[] stringsArray = new String[stringArrayListr.size()];
+        stringsArray = stringArrayListr.toArray(stringsArray);
+
+        return stringsArray;
+
+
+    }
+
+    public String[] createHeadOfFile(String pathToFileResult) {
+        /*        ;-----------------------------------------------------------------------------
+                ;- HostMonitor`s export/import file                                          -
+        ;- Generated by HostMonitor 11.92 at 07.05.2019 12:57:54                     -
+        ;- Source file:                                                              -
+        ;- Generation mode: All_Tests                                                -
+        ;-----------------------------------------------------------------------------
+
+        ;-----------------------------------------------------------------------------
+        ; Folder: Root\
+        ;-----------------------------------------------------------------------------
+        ;You may uncomment the following line to import tests exactly into src. folder
+        ;DefaultFolder = Root\*/
+
+        ArrayList<String> headData = new ArrayList<>();
+
+        headData.add(";-----------------------------------------------------------------------------");
+        headData.add(";- HostMonitor`s export/import file                                          -");
+        headData.add(";- Generated by HostMonitor 11.92 at 07.05.2019 12:57:54                     -");
+        headData.add(";- Source file:                                                              -");
+        headData.add(";- Generation mode: All_Tests                                                -");
+        headData.add(";-----------------------------------------------------------------------------");
+        headData.add("");
+        headData.add(";-----------------------------------------------------------------------------");
+        headData.add("; Folder: Root\\");
+        headData.add(";------------------------------------------------------------------------------");
+        headData.add(";You may uncomment the following line to import tests exactly into src. folder");
+        headData.add(";DefaultFolder = Root\\");
+        headData.add("");
+        headData.add("");
+
+        String[] stringsArray = new String[headData.size()];
+        stringsArray = headData.toArray(stringsArray);
+
+        return  stringsArray;
+
+
+
+    }
+}

@@ -34,12 +34,13 @@ public class WorkWithFile {
         return arrayDomanName;
     }
 
-    public void writeInFile(String fileForWrite, HashMap<String, String> map) {
+    public void writeInFile(String fileForWrite, ArrayList<String> map) {
         try {
             FileWriter writer = new FileWriter(fileForWrite);
-            for (HashMap.Entry entry : map.entrySet()) {
+            for (String entry : map) {
 //                System.out.println(entry.getValue() + " " + entry.getKey());
-                String result = entry.getValue() + "\t" + entry.getKey() + "\r\n";
+                String[] entryPars = entry.split("=");
+                String result = entryPars[1] + "\t" + entryPars[0] + "\r\n";
                 writer.write(result);
             }
             writer.close();
