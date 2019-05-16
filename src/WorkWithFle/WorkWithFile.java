@@ -1,31 +1,11 @@
 package WorkWithFle;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.stream.Stream;
 
 public class WorkWithFile {
-/*    private  String pathToFile;
 
-    public WorkWithFile(String aPathToFile) {
-        setPathToFile(aPathToFile);
-    }
-
-    public  String getPathToFile() {
-        return pathToFile;
-    }
-
-    public  void setPathToFile(String pathToFile) {
-        //Reg exp for c:\\tmp\\ListDomainIP.txt
-        String regExpPath = "(c|d):\\\\\\\\tmp\\\\\\\\\\w.+\\.txt";
-        Pattern patternPath = Pattern.compile(regExpPath);
-        if (patternPath.matcher(pathToFile).find()) {
-            this.pathToFile = pathToFile;
-        }
-    }*/
+    private static ArrayList<String> outGlobDir = new ArrayList<>();
 
     public static String[] openFile(String pathToFile){
         String[] array = null;
@@ -71,11 +51,31 @@ public class WorkWithFile {
         }
     }
 
-    public static void showDir(String pathToDir) {
+    public static ArrayList<String> showDir(String pathToDir) {
+        File folder = new File(pathToDir);
+        showDir(folder);
+
+        return outGlobDir;
+    }
+
+    public static void showDir(File folder) {
+        ArrayList<String> output = new ArrayList<>();
+        for (File fileEntry : folder.listFiles()) {
+            if (fileEntry.isDirectory()) {
+                showDir(fileEntry);
+            } else {
+//                System.out.println(fileEntry.getAbsolutePath());
+                outGlobDir.add(fileEntry.getAbsolutePath());
+            }
+        }
+
+    }
+
+/*    public static void showDir(String pathToDir) {
         try (Stream<Path> paths = Files.walk(Paths.get(pathToDir))) {
             paths.filter(Files::isRegularFile).forEach(System.out::println);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-    }
+    }*/
 }
