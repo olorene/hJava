@@ -2,6 +2,7 @@ package WorkWithFle;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class WorkWithFile {
 
@@ -71,11 +72,17 @@ public class WorkWithFile {
 
     }
 
-/*    public static void showDir(String pathToDir) {
-        try (Stream<Path> paths = Files.walk(Paths.get(pathToDir))) {
-            paths.filter(Files::isRegularFile).forEach(System.out::println);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }*/
+    public static ArrayList<String> arrayToArrayList(String[] aArray) {
+
+        ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(aArray));
+
+        return arrayList;
+    }
+
+//    https://stackoverflow.com/questions/4042434/converting-arrayliststring-to-string-in-java
+    public static String[] arrayListToArray(ArrayList<String> arrayList) {
+        String[] stringArray = arrayList.toArray(new String[0]);
+
+        return stringArray;
+    }
 }

@@ -1,10 +1,31 @@
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 public class tmp {
     public static void main(String[] args) {
-        Tmp2 tmp2 = new Tmp2();
-        tmp2.data();
-        tmp2.addStringToStringArray();
+//        Tmp2 tmp2 = new Tmp2();
+//        tmp2.data();
+//        tmp2.addStringToStringArray();
+
+        HashMap<String, String> hashMap = new HashMap<>();
+
+        hashMap.put( "1", "Chassis 1");
+        hashMap.put( "2", "Chassis 1");
+        hashMap.put( "3", "Chassis 1");
+        hashMap.put( "1", "Chassis 2");
+        hashMap.put( "2", "Chassis 2");
+
+        Set set = hashMap.entrySet();
+        Iterator iterator = set.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            System.out.println("key is: " + mentry.getKey() + " & Value is: " + mentry.getValue());
+        }
+
+
+
 
     }
 
