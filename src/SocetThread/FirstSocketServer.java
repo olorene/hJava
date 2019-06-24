@@ -10,9 +10,11 @@ public class FirstSocketServer {
 
     public void go() {
         try {
-            ServerSocket serverSocket = new ServerSocket(80);
+            ServerSocket serverSocket = new ServerSocket(5000);
             while (true) {
+//                System.out.println("Before accept");
                 Socket socket = serverSocket.accept();
+//                System.out.println("After accept");
                 PrintWriter writer = new PrintWriter(socket.getOutputStream());
                 String advice = getAdvice();
                 writer.println(advice);
