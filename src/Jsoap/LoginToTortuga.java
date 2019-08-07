@@ -5,6 +5,7 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -19,21 +20,17 @@ public class LoginToTortuga {
         try {
             String token = "";
             //grab login form page first
-            response = Jsoup
-                    .connect("http://tortuga-gamestable.top/admin/index.php?route=common/login")
+            response = Jsoup.connect("https://tortuga-gamestable.top/admin/")
                     .referrer("http://www.google.com.ua/")
                     .userAgent(userAgent)
                     .timeout(10 * 1000)
                     .execute();
-
-
-
             cookies = response.cookies();
-            response = Jsoup
-                    .connect("http://tortuga-gamestable.top/admin/index.php?route=common/login")
+
+            Connection.Response homePage = Jsoup.connect("https://tortuga-gamestable.top/admin/")
                     .referrer("http://www.google.com.ua/")
-                    .data("username", "!!!!!")
-                    .data("password", "!!!!!")
+                    .data("username", "ххххх")
+                    .data("password", "ххххх")
                     .userAgent(userAgent)
                     .timeout(10 * 1000)
                     .cookies(cookies)
@@ -41,10 +38,34 @@ public class LoginToTortuga {
 //                    .followRedirects(true)
                     .execute();
 
-            Document doc = response.parse();
+            Document doc = homePage.parse();
+            String title = doc.title();
+            System.out.println(title);
+
+            Element menu = doc.getElementById("menu").getElementById("catalog");
+//            System.out.println(menu.html());
+//            System.out.println("================================");
+            Elements myLi = menu.getElementsByTag("a");
+            for (Element oneLi : myLi) {
+                String link = oneLi.attr("abs:href");
+                String nameLink = oneLi.tagName();
+                String namePosition = oneLi.text();
+                if (namePosition == "Товары") {
+                    System.out.println(namePosition + " " + nameLink + ": " + link);
+
+                }
+            }
+
+
+
+
+//            System.out.println(doc.html());
+//            System.out.println("============================================");
+
+/*            Document doc = response.parse();
             System.out.println(doc.title());
 //            cookies.putAll(response.cookies());
-            System.out.println(cookies);
+            System.out.println(cookies);*/
 
 
 
