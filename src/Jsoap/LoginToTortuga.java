@@ -18,8 +18,8 @@ public class LoginToTortuga {
         Map<String, String> cookies;
         Connection.Response response;
         String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36";
-        String login = "lordus";
-        String password = "vorlon2258";
+        String login = "ххххххх";
+        String password = "хххххх";
         try {
             String token = "";
             //grab login form page first
