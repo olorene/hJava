@@ -29,13 +29,6 @@ public class HelloWorld {
         System.out.println(calendar.getDisplayName(1, 2, locale ));
 
 
-        int ____ = 32;
-        int __ = 16;
-        int _ = 24;
-
-        for (; _ < __; _--) {
-        }
-
 
 
 

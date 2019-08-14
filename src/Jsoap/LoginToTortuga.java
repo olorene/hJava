@@ -9,6 +9,7 @@ import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +18,8 @@ public class LoginToTortuga {
         Map<String, String> cookies;
         Connection.Response response;
         String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36";
+        String login = "lordus";
+        String password = "vorlon2258";
         try {
             String token = "";
             //grab login form page first
@@ -29,8 +32,8 @@ public class LoginToTortuga {
 
             Connection.Response homePage = Jsoup.connect("https://tortuga-gamestable.top/admin/")
                     .referrer("http://www.google.com.ua/")
-                    .data("username", "ххххх")
-                    .data("password", "ххххх")
+                    .data("username", login)
+                    .data("password", password)
                     .userAgent(userAgent)
                     .timeout(10 * 1000)
                     .cookies(cookies)
@@ -39,82 +42,92 @@ public class LoginToTortuga {
                     .execute();
 
             Document doc = homePage.parse();
-            String title = doc.title();
-            System.out.println(title);
+//            Print title of page
+//            String title = doc.title();
+//            System.out.println(title);
 
+//            ###############################
             Element menu = doc.getElementById("menu").getElementById("catalog");
 //            System.out.println(menu.html());
 //            System.out.println("================================");
-            Elements myLi = menu.getElementsByTag("a");
-            for (Element oneLi : myLi) {
-                String link = oneLi.attr("abs:href");
-                String nameLink = oneLi.tagName();
-                String namePosition = oneLi.text();
-                if (namePosition == "Товары") {
-                    System.out.println(namePosition + " " + nameLink + ": " + link);
+            Elements liList = menu.getElementsByTag("li");
 
+            String linkToPageGoods = "";
+            for (Element e : liList) {
+                if (e.text().equals("Товары") ) {
+//                    System.out.println(e.text());
+                    Elements linkGoods = e.select("a[href]");
+                    for (Element link : linkGoods) {
+//                        System.out.println(link.attr("abs:href")/*+ " " + link.text()*/);
+                        linkToPageGoods = link.attr("abs:href");
+                        break;
+                    }
+                }
+            }
+            JsoupConnectToPage connectToPageGoods = new JsoupConnectToPage();
+            Document docGoods = connectToPageGoods.connectToPage(linkToPageGoods, cookies, userAgent);
+
+//            Pars page with goods/
+/*            Element table = docGoods.select("table").get(0); //select the first table.
+            Elements rows = table.select("tr");
+            for (int i = 0; i < rows.size(); i++) { //first row is the col names so skip it.
+                Element row = rows.get(i);
+                Elements cols = row.select("td");
+                System.out.println(cols.get(0).text());
+                System.out.println(cols.get(1).text());
+                System.out.println(cols.get(2).text());
+                System.out.println(cols.get(3).text());
+                System.out.println(cols.get(4).text());
+                System.out.println(cols.get(5).text());
+                System.out.println(cols.get(6).text());
+                System.out.println(cols.get(7).text());
+            }*/
+//            ###########################################
+            String linkToNextPage = "";
+            Elements listPages = docGoods.getElementsByClass("pagination");
+            for (Element e : listPages) {
+                Elements linkPage = e.select("a[href]");
+                for (Element link : linkPage) {
+                    linkToNextPage = link.attr("abs:href");
+                    String textPage = link.text();
+                    if (textPage.equals(">")){
+                        System.out.println(linkToNextPage + " " + textPage);
+                        break;
+                    }
                 }
             }
 
+            Document docGoodsNextPage = connectToPageGoods.connectToPage(linkToNextPage, cookies, userAgent);
 
+            //            Pars page with goods/
+            Element table = docGoodsNextPage.select("table").get(0); //select the first table.
+            Elements rows = table.select("tr");
+            for (int i = 0; i < rows.size(); i++) { //first row is the col names so skip it.
+                Element row = rows.get(i);
+                Elements cols = row.select("td");
+                System.out.println(cols.get(0).text());
+                System.out.println(cols.get(1).select("[src]").attr("abs:src"));
+                System.out.println(cols.get(2).text());
+                System.out.println(cols.get(3).text());
+                System.out.println(cols.get(4).text());
+                System.out.println(cols.get(5).text());
+                System.out.println(cols.get(6).text());
+                System.out.println(cols.get(7).text());
+            }
+//            ###########################################
 
+//            Print title of page
+//            String title = docGoods.title();
+//            System.out.println(title);
 
-//            System.out.println(doc.html());
+//              Print all tag of page
+//            System.out.println(docGoods.html());
 //            System.out.println("============================================");
 
-/*            Document doc = response.parse();
-            System.out.println(doc.title());
-//            cookies.putAll(response.cookies());
-            System.out.println(cookies);*/
 
 
 
 
-
-
-//            for (Element meta : doc.select("meta")) {
-//                if (meta.attr("name").equals("csrf-token")) {
-//                    token = meta.attr("content");
-//                }
-//            }
-//            System.out.println(token);
-//            //get the cookies from the response, which we will post to the action URL
-//            Map<String, String> mapLoginPageCookies = response.cookies();
-//
-//            //lets make data map containing all the parameters and its values found in the form
-//            Map<String, String> mapParams = new HashMap<String, String>();
-//            mapParams.put("username", "!!!!!");
-//            mapParams.put("password", "!!!!!!");
-//            mapParams.put("redirect", "http://tortuga-gamestable.top/admin/index.php?route=common/login");
-//           //URL found in form's action attribute
-//            String strActionURL = "http://tortuga-gamestable.top/admin/index.php?route=common/login";
-//
-//            response = Jsoup.connect(strActionURL)
-//                    .referrer("http://tortuga-gamestable.top/admin/index.php?route=common/login")
-//                    .userAgent(userAgent)
-//                    .timeout(10 * 1000)
-//                    .data(mapParams)
-//                    .cookies(mapLoginPageCookies)
-//                    .followRedirects(true)
-//                    .execute();
-//            String redirectUrl = response.url().toExternalForm();
-//            System.out.println(redirectUrl);
-//
-//            System.out.println("HTTP Status Code: " + response.statusCode());
-//            //get the cookies
-//            Map<String, String> mapLoggedInCookies = response.cookies();
-//
-//            Document doc = Jsoup.connect(redirectUrl).userAgent(userAgent).cookies(mapLoggedInCookies).get();
-//            System.out.println(doc);
-
-
-
-
-
-//            parse the document from response
-//            Elements document = doc.getElementsByTag("h1");
-//            String someText = document.text();
-//            System.out.println(someText);
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
