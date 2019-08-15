@@ -9,6 +9,7 @@ import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,8 +19,8 @@ public class LoginToTortuga {
         Map<String, String> cookies;
         Connection.Response response;
         String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36";
-        String login = "ххххххх";
-        String password = "хххххх";
+        String login = "lordus";
+        String password = "ххххххх";
         try {
             String token = "";
             //grab login form page first
@@ -100,20 +101,20 @@ public class LoginToTortuga {
             Document docGoodsNextPage = connectToPageGoods.connectToPage(linkToNextPage, cookies, userAgent);
 
             //            Pars page with goods/
-            Element table = docGoodsNextPage.select("table").get(0); //select the first table.
-            Elements rows = table.select("tr");
-            for (int i = 0; i < rows.size(); i++) { //first row is the col names so skip it.
-                Element row = rows.get(i);
-                Elements cols = row.select("td");
-                System.out.println(cols.get(0).text());
-                System.out.println(cols.get(1).select("[src]").attr("abs:src"));
-                System.out.println(cols.get(2).text());
-                System.out.println(cols.get(3).text());
-                System.out.println(cols.get(4).text());
-                System.out.println(cols.get(5).text());
-                System.out.println(cols.get(6).text());
-                System.out.println(cols.get(7).text());
-            }
+//            Element table = docGoodsNextPage.select("table").get(0); //select the first table.
+//            Elements rows = table.select("tr");
+//            for (int i = 0; i < rows.size(); i++) { //first row is the col names so skip it.
+//                Element row = rows.get(i);
+//                Elements cols = row.select("td");
+//                System.out.println(cols.get(0).text());
+//                System.out.println(cols.get(1).select("[src]").attr("abs:src"));
+//                System.out.println(cols.get(2).text());
+//                System.out.println(cols.get(3).text());
+//                System.out.println(cols.get(4).text());
+//                System.out.println(cols.get(5).text());
+//                System.out.println(cols.get(6).text());
+//                System.out.println(cols.get(7).text());
+//            }
 //            ###########################################
 
 //            Print title of page
@@ -125,8 +126,14 @@ public class LoginToTortuga {
 //            System.out.println("============================================");
 
 
-
-
+            JsoapJdbc jsoapJdbc = new JsoapJdbc();
+            try {
+                jsoapJdbc.connectToDb();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
 
         } catch (IOException e) {
