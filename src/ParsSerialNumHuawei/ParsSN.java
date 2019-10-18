@@ -3,14 +3,16 @@ package ParsSerialNumHuawei;
 import WorkWithFle.WorkWithFile;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class ParsSN {
-    public ArrayList<String> outDisplayDevice(String pathToFile) {
+    public static ArrayList<String> outDisplayDevice(String pathToFile) {
 //        String pathToFile = "D:\\tmp\\Inventarizaciya_93xx_2017\\Івано-Франківськ\\10.171.8.1.txt";
         String[] result = WorkWithFile.openFile(pathToFile);
         ArrayList<String> out = new ArrayList<String>();
 
+//        <vc-HW-S9312-CSS0>display device
 //        <vc-HW-S9312-CSS0>display device
 //        <vc-HW-S9312-CSS0>display elabel
         String dispDevice = "display device$";
@@ -30,7 +32,7 @@ public class ParsSN {
                 endDisplayDevice = true;
             }
             if (stratDisplayDevice == true && endDisplayDevice == false) {
-//                System.out.println(result[i]);
+                System.out.println(result[i]);
                 out.add(result[i]);
             }
 
@@ -39,26 +41,36 @@ public class ParsSN {
         return out;
     }
 
-    public void findSlotDispDevice(ArrayList<String> outDispDevice) {
+    public static  ArrayList<String> findSlotDispDevice(ArrayList<String> outDispDevice) {
 //        String[] result = WorkWithFile.openFile(pathToFile);
-//        ArrayList<String> out = new ArrayList<String>();
+        ArrayList<String> out = new ArrayList<String>();
 
 //        12    -
-        Pattern patternRegex = Pattern.compile("^\\d.+\\s.+-");
-        Pattern patternChassis = Pattern.compile("Chassis");
+        Pattern patternRegex = Pattern.compile("^\\d.+\\s*-");
+//        Pattern patternRegexSubBoard = Pattern.compile("^\\s+\\d\\s+\\w+");
+        Pattern patternChassis = Pattern.compile("Chassis\\s\\d");
 
         for (int i = 0; i < outDispDevice.size(); i++) {
             String trimLine = outDispDevice.get(i).trim();
             outDispDevice.set(i, trimLine);
-
             if (patternRegex.matcher(outDispDevice.get(i)).find() ||
                     patternChassis.matcher(outDispDevice.get(i)).find()) {
+
+                String[] arrOutDispDevice = outDispDevice.get(i).trim().split("\\s");
+                out.add(arrOutDispDevice[0]);
 //                System.out.println(outDispDevice.get(i));
+//                System.out.println(arrOutDispDevice[0]);
             }
+//            if (patternRegexSubBoard.matcher(outDispDevice.get(i)).find()) {
+//                out.add("SubBoard");
+//            }
+
         }
+
+        return out;
     }
 
-    public ArrayList<String> findBlockConfig(ArrayList<String> resultArray, Pattern pattStart, Pattern pattEnd) {
+    public static ArrayList<String> findBlockConfig(ArrayList<String> resultArray, Pattern pattStart, Pattern pattEnd) {
         Boolean beginBlock = false;
         ArrayList<String> output = new ArrayList<String>();
 
@@ -81,7 +93,35 @@ public class ParsSN {
         return output;
     }
 
-    public String parsBlockConfig(ArrayList<String> blockConfig, Pattern pattern) {
+    public static ArrayList<String> findBlockConfigSolot(ArrayList<String> resultArray, Pattern pattStart, Pattern pattEnd) {
+        Boolean beginBlock = false;
+        Boolean endBlod = false;
+        ArrayList<String> output = new ArrayList<String>();
+
+        for (int i = 0; i < resultArray.size(); i++) {
+            //            Process block
+            if (pattStart.matcher(resultArray.get(i).trim()).find()) {
+                beginBlock = true;
+            }
+            if (beginBlock ==  true && pattEnd.matcher(resultArray.get(i).trim()).find()) {
+                endBlod = true;
+//                break;
+            }
+
+            if (beginBlock == true) {
+//                System.out.println(resultArray.get(i));
+                output.add(resultArray.get(i));
+                if (endBlod == true) {
+                    beginBlock = false;
+                    endBlod = false;
+                }
+            }
+        }
+
+        return output;
+    }
+
+    public static String parsBlockConfig(ArrayList<String> blockConfig, Pattern pattern) {
         String[] output = null;
         for (int i = 0; i < blockConfig.size(); i++) {
             if (pattern.matcher(blockConfig.get(i)).find()) {
@@ -94,6 +134,20 @@ public class ParsSN {
         return output[1];
     }
 
+    public static String hostname(ArrayList<String> cliOutput) {
+        Pattern pattDispDev = Pattern.compile("display device");
+        String[] output = null;
+        for (int j = 0; j < cliOutput.size(); j++) {
+            if (pattDispDev.matcher(cliOutput.get(j)).find()) {
+                output = cliOutput.get(j).trim().split(">");
+                output = output[0].trim().split("<");
+
+                break;
+            }
+        }
+
+        return output[1];
+    }
 }
 
 

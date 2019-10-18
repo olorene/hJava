@@ -24,8 +24,10 @@ public class TestDriveParsSN {
         String[] result = WorkWithFile.openFile(pathToFile);
         ArrayList<String> resultArray = new ArrayList<>(Arrays.asList(result));
 
+        ParsSN2019.headreFileSn(pathToFile);
 
-//        Type  Slot    BoardType	 BarCode	 Description	 Region	 Hostname	 IP	 Chassis	date
+//*
+///        Type  Slot    BoardType	 BarCode	 Description	 Region	 Hostname	 IP	 Chassis	date
         String type = "Type";
         String slot = "Slot";
         String boardType = "BoardType";
@@ -45,12 +47,15 @@ public class TestDriveParsSN {
         WorkWithFile.writeFile(pathToSnFile, resultLineArr);
 
 
+
         ParsSN parsSN = new ParsSN();
 
 //        Process header output file from Huawei 9312. Process have not ended.
-/*
-        ArrayList<String> outDispDevice = parsSN.outDisplayDevice(pathToFile);
-        parsSN.findSlotDispDevice(outDispDevice);*/
+//        ArrayList<String> outDispDevice = parsSN.outDisplayDevice(pathToFile);
+//        parsSN.findSlotDispDevice(outDispDevice);
+
+//        Device type
+//        System.out.println(ParsSN.deviceType(cliOutput));
 
 //      [Rack_1]
         type = "Backplane";
@@ -83,11 +88,11 @@ public class TestDriveParsSN {
 
 
 
-        resultLine = type + ";" + slot + ";" + boardType + ";" + barCode + ";" + description +
-                ";" + region + ";" + hostname + ";" + ip + ";" + chassis + ";" + date;
-        resultLineArr = new String[1];
-        resultLineArr[0] = resultLine;
-        WorkWithFile.writeFile(pathToSnFile, resultLineArr);
+//        resultLine = type + ";" + slot + ";" + boardType + ";" + barCode + ";" + description +
+//                ";" + region + ";" + hostname + ";" + ip + ";" + chassis + ";" + date;
+//        resultLineArr = new String[1];
+//        resultLineArr[0] = resultLine;
+//        WorkWithFile.writeFile(pathToSnFile, resultLineArr);
 
 
 
