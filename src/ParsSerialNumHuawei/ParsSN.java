@@ -97,9 +97,10 @@ public class ParsSN {
         Boolean beginBlock = false;
         Boolean endBlod = false;
         ArrayList<String> output = new ArrayList<String>();
-
+//        System.out.println("ijlou856p4uioojioeufg + " +  resultArray.size());
         for (int i = 0; i < resultArray.size(); i++) {
             //            Process block
+//            System.out.println("pwiorj;slkcjpjo;slkjcv + " + resultArray.get(i) + " -=- " + pattEnd.toString());
             if (pattStart.matcher(resultArray.get(i).trim()).find()) {
                 beginBlock = true;
             }
@@ -123,15 +124,25 @@ public class ParsSN {
 
     public static String parsBlockConfig(ArrayList<String> blockConfig, Pattern pattern) {
         String[] output = null;
+        String outString = "N/A";
+//        System.out.println("15919159 + " + blockConfig.size());
         for (int i = 0; i < blockConfig.size(); i++) {
+//            System.out.println("-=lasdkjfhljkv=-" + blockConfig.get(i));
             if (pattern.matcher(blockConfig.get(i)).find()) {
+//                System.out.println("-=111111111111111=-" + blockConfig.get(i));
                 output = blockConfig.get(i).trim().split("=");
-
+//                System.out.println("333333333333333" + output[1]);
                 break;
             }
         }
+//        System.out.println("+++++++++++" + output[0] + "=-=-=" + output[1]);
+        if (output.length == 2) {
+            outString = output[1];
+        } else {
+            outString = "N/A";
+        }
 
-        return output[1];
+        return outString;
     }
 
     public static String hostname(ArrayList<String> cliOutput) {

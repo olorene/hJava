@@ -27,6 +27,21 @@ public class WorkWithFile {
         return array;
     }
 
+    public static void appendInFile(String pathToFile, String[] array) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(pathToFile, true));
+            for (String line : array) {
+//                writer.newLine();
+                String row = line + "\r\n";
+                writer.append(row);
+            }
+            writer.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
+    }
+
     public static void writeFile(String pathToFile, String[] array ) {
         try {
             FileWriter writer = new FileWriter(pathToFile, true);
