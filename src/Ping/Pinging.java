@@ -1,7 +1,11 @@
 package Ping;
 
+import WorkWithFle.WorkWithFile;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 
 public class Pinging {
     // Sends ping request to a provided IP address
@@ -28,16 +32,37 @@ public class Pinging {
         return result;
     }
 
+    public static void getIpFromHost (String domainName) throws  UnknownHostException, IOException {
+//        Boolean result = false;
+//        System.out.println("nslookup for " + domainName);
+//        InetAddress ipForDomain = InetAddress.getByName(domainName);
+        InetAddress[] getAll = InetAddress.getAllByName(domainName);
+//        System.out.println("IP for hostname " + ipForDomain.getHostAddress());
+        for (InetAddress var :
+                getAll) {
+
+            String hostAdress = var.getHostAddress();
+            System.out.println(domainName + " ~ " +  hostAdress);
+
+        }
+
+
+    }
+
     // Driver code
     public static void main(String[] args) throws UnknownHostException, IOException
     {
-        String ipAddress = "127.0.0.1";
-        sendPingRequest(ipAddress);
+//        String ipAddress = "127.0.0.1";
+//        sendPingRequest(ipAddress);
+//
+//        ipAddress = "google.com.ua";
+//        sendPingRequest(ipAddress);
+//
+//        ipAddress = "145.154.42.58";
+//        sendPingRequest(ipAddress);
 
-        ipAddress = "google.com.ua";
-        sendPingRequest(ipAddress);
+        String domainName = "labrc.net";
+        getIpFromHost(domainName);
 
-        ipAddress = "145.154.42.58";
-        sendPingRequest(ipAddress);
     }
 }
