@@ -2,37 +2,48 @@ import java.util.ArrayList;
 
 public class tmp {
     public static void main(String[] args) {
-        Tmp2 tmp2 = new Tmp2();
-        tmp2.data();
-        tmp2.addStringToStringArray();
-
-    }
-
-
-    public void tmpMethod() {
-        String[] strings = new String[]{"Заклинания", "Невидемость"};
-        String[] result = new String[strings.length + 1];
-
-        print_String_Array(strings);
-
-        for (int i = 0; i < strings.length; i++) {
-            result[i] = strings[i];
+        int number = 20;
+        switch (number) {
+            case 10:
+                System.out.println(10);
+                break;
+            case 20:
+                System.out.println(20);
+                break;
+            case 30:
+                System.out.println(30);
+                break;
+            default:
+                System.out.println("Not in 10 to 30");
         }
-        result[strings.length] = "Щит";
-        System.out.println(strings.length);
-        System.out.println(result.length);
 
-        print_String_Array(result);
-
-
-    }
-
-    private void print_String_Array(String[] strings) {
-        for (int i = 0; i < strings.length; i++) {
-            System.out.println(strings[i]);
+        char ch = 'o';
+        switch (ch) {
+            case 'a':
+                System.out.println("Vowel");
+                break;
+            case 'b':
+                System.out.println("Vowel");
+                break;
+            case 'o':
+                System.out.println("Vowel");
+                break;
+            default:
+                System.out.println("Constant");
         }
-        System.out.println("----------");
-    }
 
+        String level = "Expert";
+        switch (level) {
+            case "Juniour":
+                System.out.println("Juniour");
+                break;
+            case "Middle":
+                System.out.println("Middle");
+                break;
+            case "Expert":
+                System.out.println("Expert");
+                break;
+        }
+    }
 
 }
