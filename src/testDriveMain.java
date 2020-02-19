@@ -8,8 +8,7 @@ public class testDriveMain {
     }
 
     public static void main(String[] args) {
-        tmp tmp = new tmp();
-        tmp.tmpMethod();
+
 
     }
 
