@@ -23,7 +23,7 @@ public class Pinging {
     public static Boolean pingingHost (String ipAddress) throws UnknownHostException, IOException {
         Boolean result = false;
         InetAddress geek = InetAddress.getByName(ipAddress);
-        System.out.println("Sending Ping Request to " + ipAddress);
+//        System.out.println("Sending Ping Request to " + ipAddress);
         if (geek.isReachable(5000)) {
             result = true;
 //            System.out.println("Host is reachable");

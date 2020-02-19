@@ -55,6 +55,16 @@ public class WorkWithFile {
             ex.printStackTrace();
         }
     }
+    public static void writeFile(String pathToFile, String line ) {
+        try {
+            FileWriter writer = new FileWriter(pathToFile, true);
+            writer.write(line);
+            writer.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public static void deleteFile(String pathToFile) {
         try {
